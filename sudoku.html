@@ -1,0 +1,55 @@
+<!-- 
+Very simple apporach using table and repeat directive of angluarjs. html page as container for this project.
+Other solutions could be:
+    - using jQuery for initializing and traversing in script
+    - or generating html body content in script: something like $('body').append($('<div>').addClass('xxx')
+I selected this approach to demonstrate pure html, pure css and javascript/angluar interactions    
+-->
+
+<!DOCTYPE html>
+<html lang="en" ng-app="sudokuApp">
+<head>
+    <title>
+        Sudoku Game Project
+    </title>
+    <link type="text/css" rel="stylesheet" href="css/sudoku.css">
+    <script src="js/angular.min.js"></script>
+    <script src="js/sudoku_app.js"></script>
+</head>
+<body ng-controller="SudokuController" class="sudoku-body">
+    <p class="welcome-text" layout-align="center center">Welcome to Sudoku Solver Project. <br/> Press 'Solve' button to solve the puzzle. Press 'Load File' button to load new sudoku puzzle. <br/> Good Luck!</p>
+    <div class="board-body">
+    <div style="position: relative; overflow: hidden;">
+        <div style="position: relative; float: left;">
+        <table>
+            <tr ng-repeat="i in [0, 1, 2, 3, 4, 5, 6, 7, 8]">
+                <td ng-repeat="j in [0, 1, 2, 3, 4, 5, 6, 7, 8]">
+                     <span data-ng-bind="initState[i][j]"></span>
+            </tr>
+        </table>
+        </div>
+        <div style="position: relative; float: left;" class="solve-button-div">
+        
+            <button ng-click="solve()" class="solve-button">Solve</button>
+
+        </div>
+        <div style="position: relative; float: left;">
+        <table>
+            <tr ng-repeat="i in [0, 1, 2, 3, 4, 5, 6, 7, 8]">
+                <td ng-repeat="j in [0, 1, 2, 3, 4, 5, 6, 7, 8]">
+                     <span data-ng-bind="finalState[i][j]"></span>
+            </tr>
+        </table>
+        </div>
+    </div>
+    </div>
+    <div class="load-button-div">
+        Load File <input type='file' accept='text/plain' custom-on-change="uploadFile" class="load-button">
+    </div>
+    <br>
+    <p class="info-note"> Note: sudoku elements have to be comma spareted. </p>
+    <br/><br/><br/><br/><br/><br/>
+    <p class="info-text"> <span class="info">Information:</span> {{info}}</p>
+    
+</body>
+</html>
